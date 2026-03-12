@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Word to PDF Converter</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="40" height="40">
+          <rect x="6" y="2" width="28" height="36" rx="3" fill="#2563eb"/>
+          <rect x="10" y="8" width="16" height="2" rx="1" fill="#93c5fd"/>
+          <rect x="10" y="13" width="20" height="2" rx="1" fill="#93c5fd"/>
+          <rect x="10" y="18" width="18" height="2" rx="1" fill="#93c5fd"/>
+          <rect x="10" y="23" width="14" height="2" rx="1" fill="#93c5fd"/>
+          <polygon points="30,28 42,28 42,44 30,44" fill="#dc2626"/>
+          <polygon points="30,28 36,34 30,34" fill="#fca5a5"/>
+          <rect x="33" y="34" width="6" height="2" rx="1" fill="#fecaca"/>
+          <rect x="33" y="38" width="6" height="2" rx="1" fill="#fecaca"/>
+        </svg>
+      </div>
+      <h1>Word to PDF Converter</h1>
+      <p class="subtitle">Convert .doc and .docx files to PDF instantly</p>
+    </header>
+
+    <main>
+      <div class="card" id="dropzone">
+        <div class="drop-content" id="dropContent">
+          <div class="upload-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="17 8 12 3 7 8"/>
+              <line x1="12" y1="3" x2="12" y2="15"/>
+            </svg>
+          </div>
+          <p class="drop-label">Drag &amp; drop your Word file here</p>
+          <p class="drop-sublabel">or</p>
+          <label class="btn btn-primary" for="fileInput">Browse File</label>
+          <input type="file" id="fileInput" accept=".doc,.docx" hidden />
+          <p class="drop-hint">Supports .doc and .docx &mdash; max 50 MB</p>
+        </div>
+
+        <div class="file-preview" id="filePreview" hidden>
+          <div class="file-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+            </svg>
+          </div>
+          <div class="file-info">
+            <span class="file-name" id="fileName"></span>
+            <span class="file-size" id="fileSize"></span>
+          </div>
+          <button class="btn-icon" id="removeFile" title="Remove file">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"/>
+              <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-convert" id="convertBtn" disabled>
+          <span class="btn-text">Convert to PDF</span>
+          <span class="btn-spinner" hidden>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="spin">
+              <path d="M21 12a9 9 0 1 1-6.219-8.56"/>
+            </svg>
+            Converting...
+          </span>
+        </button>
+      </div>
+
+      <div class="alert alert-error" id="errorAlert" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="12" cy="12" r="10"/>
+          <line x1="12" y1="8" x2="12" y2="12"/>
+          <line x1="12" y1="16" x2="12.01" y2="16"/>
+        </svg>
+        <span id="errorMsg"></span>
+      </div>
+
+      <div class="alert alert-success" id="successAlert" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+          <polyline points="22 4 12 14.01 9 11.01"/>
+        </svg>
+        <span>PDF converted successfully! Your download should start automatically.</span>
+      </div>
+    </main>
+
+    <footer>
+      <p>Files are processed server-side and not stored permanently.</p>
+    </footer>
+  </div>
+
+  <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
